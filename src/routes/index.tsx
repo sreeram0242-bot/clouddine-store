@@ -167,7 +167,7 @@ function LandingPage() {
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
           <a href="#top" className="flex items-center gap-3">
-            <img src={logo} alt="Cloud Dine" className="h-9 w-9" />
+            <img src={logo} alt="Cloud Dine" className="h-9 w-auto" />
             <span className="font-display text-xl font-semibold">
               Cloud <span className="text-gold-gradient">Dine</span>
             </span>
@@ -507,7 +507,7 @@ function LandingPage() {
       <footer className="border-t border-border/60 py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 md:flex-row lg:px-8">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="Cloud Dine" className="h-7 w-7" />
+            <img src={logo} alt="Cloud Dine" className="h-7 w-auto" />
             <span className="font-display text-base font-semibold">
               Cloud <span className="text-gold-gradient">Dine</span>
             </span>
@@ -541,15 +541,29 @@ function SectionHeader({ eyebrow, title, sub }: { eyebrow: string; title: React.
 function ContactForm() {
   const [sent, setSent] = useState(false);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const subject = encodeURIComponent(`Cloud Dine demo — ${data.get("name")}`);
-    const body = encodeURIComponent(
-      `Name: ${data.get("name")}\nRestaurant: ${data.get("restaurant")}\nPhone: ${data.get("phone")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`,
-    );
-    window.location.href = `mailto:cloud.dinee@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);
+    const data = new FormData(e.currentTarget);
+    
+    // Set a nice subject line for the email
+    data.append("_subject", `Cloud Dine demo request — ${data.get("name")}`);
+    
+    try {
+      await fetch("https://formsubmit.co/ajax/cloud.dinee@gmail.com", {
+        method: "POST",
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      });
+      alert("Message sent successfully! We will contact you soon.");
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setSent(false);
+    }
   }
 
   return (
@@ -571,8 +585,8 @@ function ContactForm() {
           className="w-full resize-none rounded-xl border border-input bg-background/40 px-4 py-3 text-sm outline-none transition focus:border-gold/60 focus:ring-2 focus:ring-ring"
         />
       </div>
-      <button type="submit" className="gold-gradient mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-primary-foreground shadow-gold transition hover:brightness-105">
-        {sent ? "Opening your mail…" : "Request my demo"} <ArrowRight className="h-4 w-4" />
+      <button type="submit" disabled={sent} className="gold-gradient mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-primary-foreground shadow-gold transition hover:brightness-105 disabled:opacity-70 disabled:cursor-not-allowed">
+        {sent ? "Sending message..." : "Request my demo"} <ArrowRight className="h-4 w-4" />
       </button>
       <p className="mt-3 text-center text-xs text-muted-foreground">We reply within one working day.</p>
     </form>
