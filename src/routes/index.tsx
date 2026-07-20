@@ -35,6 +35,7 @@ import shotWaiterDashM from "@/assets/shots/waiter_m_dash.webp";
 import shotWaiterOrdersM from "@/assets/shots/waiter_m_orders.webp";
 import shotWaiterCallsM from "@/assets/shots/waiter_m_calls.webp";
 import shotCustomerMenuM from "@/assets/shots/customer_m_menu.webp";
+import shotCustomerMenu2M from "@/assets/shots/customer_m_menu2.webp";
 import shotBillingMDashboard from "@/assets/shots/billing_m_dashboard.png";
 import shotBillingMNewBill from "@/assets/shots/billing_m_new_bill.png";
 import shotBillingMCustomers from "@/assets/shots/billing_m_customers.png";
