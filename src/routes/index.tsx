@@ -40,6 +40,10 @@ import shotBillingMDashboard from "@/assets/shots/billing_m_dashboard.png";
 import shotBillingMNewBill from "@/assets/shots/billing_m_new_bill.png";
 import shotBillingMCustomers from "@/assets/shots/billing_m_customers.png";
 import shotBillingMRevenue from "@/assets/shots/billing_m_revenue.png";
+import shotBillingDashboard from "@/assets/shots/billing_dashboard.png";
+import shotBillingNewBill from "@/assets/shots/billing_new_bill.png";
+import shotBillingCustomers from "@/assets/shots/billing_customers.png";
+import shotOfferMonitor from "@/assets/shots/offer_monitor_revenue.png";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -421,25 +425,42 @@ function LandingPage() {
             sub="A lightning-fast billing interface with no reliance on the cloud. Track revenue, manage customers, and print bills offline."
           />
 
-          <div className="mt-8 grid grid-cols-1 gap-12 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          <div className="mt-8 grid grid-cols-1 gap-12 sm:mt-16 sm:grid-cols-2 lg:gap-16">
             {[
-              { label: "Dashboard", src: shotBillingMDashboard },
-              { label: "New Bill", src: shotBillingMNewBill },
-              { label: "Customers", src: shotBillingMCustomers },
-              { label: "Revenue", src: shotBillingMRevenue },
+              { label: "Dashboard", desktop: shotBillingDashboard, mobile: shotBillingMDashboard },
+              { label: "New Bill", desktop: shotBillingNewBill, mobile: shotBillingMNewBill },
+              { label: "Customers", desktop: shotBillingCustomers, mobile: shotBillingMCustomers },
+              { label: "Revenue", desktop: shotOfferMonitor, mobile: shotBillingMRevenue },
             ].map((shot) => (
-              <div key={shot.label} className="flex flex-col items-center gap-4">
-                <p className="font-display text-lg font-semibold text-foreground">{shot.label}</p>
-                <div className="relative mx-auto w-[240px] sm:w-[260px]">
-                  <span className="absolute -left-[3px] top-[90px] h-8 w-[3px] rounded-l-sm bg-neutral-700" />
-                  <span className="absolute -left-[3px] top-[130px] h-12 w-[3px] rounded-l-sm bg-neutral-700" />
-                  <span className="absolute -left-[3px] top-[186px] h-12 w-[3px] rounded-l-sm bg-neutral-700" />
-                  <span className="absolute -right-[3px] top-[150px] h-16 w-[3px] rounded-r-sm bg-neutral-700" />
-                  <div className="relative rounded-[2.5rem] border border-neutral-700 bg-neutral-900 p-[10px] shadow-[0_25px_60px_-20px_rgba(0,0,0,0.9),inset_0_0_0_2px_rgba(255,255,255,0.03)]" style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)" }}>
-                    <div className="relative overflow-hidden rounded-[2rem] bg-background">
-                      <img src={shot.src} alt={shot.label} className="block w-full" loading="lazy" />
+              <div key={shot.label} className="relative w-full pb-8">
+                <p className="mb-6 font-display text-lg font-semibold text-foreground text-center sm:text-xl">{shot.label}</p>
+                <div className="relative mx-auto w-full max-w-md">
+                  
+                  {/* PC View */}
+                  <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-elev w-[85%] relative z-10 transition-transform hover:z-30 hover:scale-[1.02]">
+                    <div className="border-b border-border/70 bg-surface-2/70 px-3 py-2 flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-destructive/70" />
+                      <span className="h-2 w-2 rounded-full bg-gold-soft" />
+                      <span className="h-2 w-2 rounded-full bg-gold" />
+                    </div>
+                    <img src={shot.desktop} alt={`${shot.label} Desktop`} className="block w-full" loading="lazy" />
+                  </div>
+
+                  {/* Mobile View */}
+                  <div className="absolute right-0 bottom-[-15%] w-[35%] z-20 transition-transform hover:z-30 hover:scale-[1.05]">
+                    <div className="relative w-full">
+                      <span className="absolute -left-[2px] top-[15%] h-[10%] w-[2px] rounded-l-sm bg-neutral-700" />
+                      <span className="absolute -left-[2px] top-[30%] h-[15%] w-[2px] rounded-l-sm bg-neutral-700" />
+                      <span className="absolute -left-[2px] top-[50%] h-[15%] w-[2px] rounded-l-sm bg-neutral-700" />
+                      <span className="absolute -right-[2px] top-[40%] h-[20%] w-[2px] rounded-r-sm bg-neutral-700" />
+                      <div className="relative rounded-2xl border border-neutral-700 bg-neutral-900 p-[5px] shadow-[0_30px_60px_-15px_rgba(0,0,0,1)]" style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)" }}>
+                        <div className="relative overflow-hidden rounded-[14px] bg-background">
+                          <img src={shot.mobile} alt={`${shot.label} Mobile`} className="block w-full" loading="lazy" />
+                        </div>
+                      </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             ))}
