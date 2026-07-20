@@ -35,7 +35,10 @@ import shotWaiterDashM from "@/assets/shots/waiter_m_dash.webp";
 import shotWaiterOrdersM from "@/assets/shots/waiter_m_orders.webp";
 import shotWaiterCallsM from "@/assets/shots/waiter_m_calls.webp";
 import shotCustomerMenuM from "@/assets/shots/customer_m_menu.webp";
-import shotCustomerMenu2M from "@/assets/shots/customer_m_menu2.webp";
+import shotBillingMDashboard from "@/assets/shots/billing_m_dashboard.png";
+import shotBillingMNewBill from "@/assets/shots/billing_m_new_bill.png";
+import shotBillingMCustomers from "@/assets/shots/billing_m_customers.png";
+import shotBillingMRevenue from "@/assets/shots/billing_m_revenue.png";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -149,6 +152,19 @@ const plans = [
       "Dedicated onboarding",
     ],
     cta: "Talk to us",
+    highlight: false,
+  },
+  {
+    name: "Offline Billing System",
+    price: "₹299",
+    tag: "per month",
+    features: [
+      "Live offer tracking",
+      "Revenue insights",
+      "Real-time alerts",
+      "Email support",
+    ],
+    cta: "Start tracking",
     highlight: false,
   },
 ];
@@ -391,6 +407,41 @@ function LandingPage() {
                 <img src={currentShot.src} alt={`${portal.label} — ${currentShot.label}`} className="block w-full" loading="lazy" decoding="async" />
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* OFFLINE BILLING SYSTEM */}
+      <section id="billing" className="border-t border-border/60 py-12 sm:py-24">
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
+          <SectionHeader
+            eyebrow="New Product"
+            title={<>Introducing: <span className="text-gold-gradient">Offline Billing System</span></>}
+            sub="A lightning-fast billing interface with no reliance on the cloud. Track revenue, manage customers, and print bills offline."
+          />
+
+          <div className="mt-8 grid grid-cols-1 gap-12 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {[
+              { label: "Dashboard", src: shotBillingMDashboard },
+              { label: "New Bill", src: shotBillingMNewBill },
+              { label: "Customers", src: shotBillingMCustomers },
+              { label: "Revenue", src: shotBillingMRevenue },
+            ].map((shot) => (
+              <div key={shot.label} className="flex flex-col items-center gap-4">
+                <p className="font-display text-lg font-semibold text-foreground">{shot.label}</p>
+                <div className="relative mx-auto w-[240px] sm:w-[260px]">
+                  <span className="absolute -left-[3px] top-[90px] h-8 w-[3px] rounded-l-sm bg-neutral-700" />
+                  <span className="absolute -left-[3px] top-[130px] h-12 w-[3px] rounded-l-sm bg-neutral-700" />
+                  <span className="absolute -left-[3px] top-[186px] h-12 w-[3px] rounded-l-sm bg-neutral-700" />
+                  <span className="absolute -right-[3px] top-[150px] h-16 w-[3px] rounded-r-sm bg-neutral-700" />
+                  <div className="relative rounded-[2.5rem] border border-neutral-700 bg-neutral-900 p-[10px] shadow-[0_25px_60px_-20px_rgba(0,0,0,0.9),inset_0_0_0_2px_rgba(255,255,255,0.03)]" style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)" }}>
+                    <div className="relative overflow-hidden rounded-[2rem] bg-background">
+                      <img src={shot.src} alt={shot.label} className="block w-full" loading="lazy" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
