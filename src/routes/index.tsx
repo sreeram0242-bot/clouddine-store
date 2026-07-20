@@ -152,20 +152,7 @@ const plans = [
     cta: "Book a demo",
     highlight: true,
   },
-  {
-    name: "Chain",
-    price: "Custom",
-    tag: "multi-outlet, master panel",
-    features: [
-      "Everything in Restaurant",
-      "Master panel across outlets",
-      "Platform-wide revenue reports",
-      "Subscription & billing controls",
-      "Dedicated onboarding",
-    ],
-    cta: "Talk to us",
-    highlight: false,
-  },
+
   {
     name: "Offline Billing System",
     price: "₹299",
