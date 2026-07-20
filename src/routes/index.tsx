@@ -104,6 +104,13 @@ const portals = [
   },
 ] as const;
 
+const billingShots = [
+  { label: "Dashboard", desktop: shotBillingDashboard, mobile: shotBillingMDashboard },
+  { label: "New Bill", desktop: shotBillingNewBill, mobile: shotBillingMNewBill },
+  { label: "Customers", desktop: shotBillingCustomers, mobile: shotBillingMCustomers },
+  { label: "Revenue", desktop: shotOfferMonitor, mobile: shotBillingMRevenue },
+];
+
 const features = [
   { icon: QrCode, title: "QR-code ordering", text: "Guests scan, browse the menu, and order straight from their table — no app, no waiting." },
   { icon: LayoutDashboard, title: "Live admin dashboard", text: "Today's revenue, live orders, active tables and waiter calls on one calm screen." },
@@ -177,6 +184,7 @@ const plans = [
 function LandingPage() {
   const [activePortal, setActivePortal] = useState<(typeof portals)[number]["key"]>("admin");
   const [activeShot, setActiveShot] = useState(0);
+  const [activeBillingShot, setActiveBillingShot] = useState(0);
   const [navOpen, setNavOpen] = useState(false);
 
   const portal = portals.find((p) => p.key === activePortal)!;
@@ -425,45 +433,57 @@ function LandingPage() {
             sub="A lightning-fast billing interface with no reliance on the cloud. Track revenue, manage customers, and print bills offline."
           />
 
-          <div className="mt-8 grid grid-cols-1 gap-12 sm:mt-16 sm:grid-cols-2 lg:gap-16">
-            {[
-              { label: "Dashboard", desktop: shotBillingDashboard, mobile: shotBillingMDashboard },
-              { label: "New Bill", desktop: shotBillingNewBill, mobile: shotBillingMNewBill },
-              { label: "Customers", desktop: shotBillingCustomers, mobile: shotBillingMCustomers },
-              { label: "Revenue", desktop: shotOfferMonitor, mobile: shotBillingMRevenue },
-            ].map((shot) => (
-              <div key={shot.label} className="relative w-full pb-8">
-                <p className="mb-6 font-display text-lg font-semibold text-foreground text-center sm:text-xl">{shot.label}</p>
-                <div className="relative mx-auto w-full max-w-md">
-                  
-                  {/* PC View */}
-                  <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-elev w-[92%] relative z-10 transition-transform hover:z-30 hover:scale-[1.02]">
-                    <div className="border-b border-border/70 bg-surface-2/70 px-3 py-2 flex items-center gap-1.5">
-                      <span className="h-2 w-2 rounded-full bg-destructive/70" />
-                      <span className="h-2 w-2 rounded-full bg-gold-soft" />
-                      <span className="h-2 w-2 rounded-full bg-gold" />
-                    </div>
-                    <img src={shot.desktop} alt={`${shot.label} Desktop`} className="block w-full" loading="lazy" />
+          <div className="mt-6 grid gap-4 sm:mt-10 sm:gap-6 lg:grid-cols-[260px_1fr]">
+            <div className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible">
+              {billingShots.map((s, i) => (
+                <button
+                  key={s.label}
+                  onClick={() => setActiveBillingShot(i)}
+                  className={`shrink-0 rounded-lg border p-2 text-left text-xs transition sm:rounded-xl sm:p-3 sm:text-sm lg:shrink ${
+                    i === activeBillingShot ? "border-gold/60 bg-surface" : "border-border bg-surface/40 hover:bg-surface"
+                  }`}
+                >
+                  <div className="mb-1.5 overflow-hidden rounded border border-border/60 sm:mb-2 sm:rounded-md">
+                    <img src={s.desktop} alt="" className="block h-12 w-24 object-cover object-top sm:h-16 sm:w-full" loading="lazy" decoding="async" />
                   </div>
+                  <span className={i === activeBillingShot ? "text-gold" : "text-muted-foreground"}>{s.label}</span>
+                </button>
+              ))}
+            </div>
 
-                  {/* Mobile View */}
-                  <div className="absolute right-[-4%] bottom-[-5%] w-[26%] z-20 transition-transform hover:z-30 hover:scale-[1.05]">
-                    <div className="relative w-full">
-                      <span className="absolute -left-[2px] top-[15%] h-[10%] w-[2px] rounded-l-sm bg-neutral-700" />
-                      <span className="absolute -left-[2px] top-[30%] h-[15%] w-[2px] rounded-l-sm bg-neutral-700" />
-                      <span className="absolute -left-[2px] top-[50%] h-[15%] w-[2px] rounded-l-sm bg-neutral-700" />
-                      <span className="absolute -right-[2px] top-[40%] h-[20%] w-[2px] rounded-r-sm bg-neutral-700" />
-                      <div className="relative rounded-2xl border border-neutral-700 bg-neutral-900 p-[4px] shadow-[0_30px_60px_-15px_rgba(0,0,0,1)]" style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)" }}>
-                        <div className="relative overflow-hidden rounded-[12px] bg-background">
-                          <img src={shot.mobile} alt={`${shot.label} Mobile`} className="block w-full" loading="lazy" />
-                        </div>
-                      </div>
+            <div className="relative w-full max-w-4xl mx-auto">
+              
+              {/* PC View */}
+              <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-elev w-[92%] relative z-10 transition-transform hover:z-30 hover:scale-[1.02]">
+                <div className="border-b border-border/70 bg-surface-2/70 px-3 py-2 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-destructive/70" />
+                    <span className="h-2 w-2 rounded-full bg-gold-soft" />
+                    <span className="h-2 w-2 rounded-full bg-gold" />
+                    <span className="ml-2 truncate text-[10px] text-muted-foreground sm:ml-3 sm:text-xs">
+                      clouddine.app / offline-billing / {billingShots[activeBillingShot].label.toLowerCase().replace(/\s+/g, "-")}
+                    </span>
+                  </div>
+                </div>
+                <img src={billingShots[activeBillingShot].desktop} alt={`${billingShots[activeBillingShot].label} Desktop`} className="block w-full" loading="lazy" />
+              </div>
+
+              {/* Mobile View */}
+              <div className="absolute right-[-4%] bottom-[-5%] w-[26%] z-20 transition-transform hover:z-30 hover:scale-[1.05]">
+                <div className="relative w-full">
+                  <span className="absolute -left-[2px] top-[15%] h-[10%] w-[2px] rounded-l-sm bg-neutral-700" />
+                  <span className="absolute -left-[2px] top-[30%] h-[15%] w-[2px] rounded-l-sm bg-neutral-700" />
+                  <span className="absolute -left-[2px] top-[50%] h-[15%] w-[2px] rounded-l-sm bg-neutral-700" />
+                  <span className="absolute -right-[2px] top-[40%] h-[20%] w-[2px] rounded-r-sm bg-neutral-700" />
+                  <div className="relative rounded-2xl border border-neutral-700 bg-neutral-900 p-[4px] shadow-[0_30px_60px_-15px_rgba(0,0,0,1)]" style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)" }}>
+                    <div className="relative overflow-hidden rounded-[12px] bg-background">
+                      <img src={billingShots[activeBillingShot].mobile} alt={`${billingShots[activeBillingShot].label} Mobile`} className="block w-full" loading="lazy" />
                     </div>
                   </div>
-
                 </div>
               </div>
-            ))}
+
+            </div>
           </div>
         </div>
       </section>
