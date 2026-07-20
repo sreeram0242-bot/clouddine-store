@@ -437,7 +437,7 @@ function LandingPage() {
                 <div className="relative mx-auto w-full max-w-md">
                   
                   {/* PC View */}
-                  <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-elev w-[85%] relative z-10 transition-transform hover:z-30 hover:scale-[1.02]">
+                  <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-elev w-[92%] relative z-10 transition-transform hover:z-30 hover:scale-[1.02]">
                     <div className="border-b border-border/70 bg-surface-2/70 px-3 py-2 flex items-center gap-1.5">
                       <span className="h-2 w-2 rounded-full bg-destructive/70" />
                       <span className="h-2 w-2 rounded-full bg-gold-soft" />
@@ -447,14 +447,14 @@ function LandingPage() {
                   </div>
 
                   {/* Mobile View */}
-                  <div className="absolute right-0 bottom-[-15%] w-[35%] z-20 transition-transform hover:z-30 hover:scale-[1.05]">
+                  <div className="absolute right-[-4%] bottom-[-5%] w-[26%] z-20 transition-transform hover:z-30 hover:scale-[1.05]">
                     <div className="relative w-full">
                       <span className="absolute -left-[2px] top-[15%] h-[10%] w-[2px] rounded-l-sm bg-neutral-700" />
                       <span className="absolute -left-[2px] top-[30%] h-[15%] w-[2px] rounded-l-sm bg-neutral-700" />
                       <span className="absolute -left-[2px] top-[50%] h-[15%] w-[2px] rounded-l-sm bg-neutral-700" />
                       <span className="absolute -right-[2px] top-[40%] h-[20%] w-[2px] rounded-r-sm bg-neutral-700" />
-                      <div className="relative rounded-2xl border border-neutral-700 bg-neutral-900 p-[5px] shadow-[0_30px_60px_-15px_rgba(0,0,0,1)]" style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)" }}>
-                        <div className="relative overflow-hidden rounded-[14px] bg-background">
+                      <div className="relative rounded-2xl border border-neutral-700 bg-neutral-900 p-[4px] shadow-[0_30px_60px_-15px_rgba(0,0,0,1)]" style={{ background: "linear-gradient(145deg,#1a1a1a,#0a0a0a)" }}>
+                        <div className="relative overflow-hidden rounded-[12px] bg-background">
                           <img src={shot.mobile} alt={`${shot.label} Mobile`} className="block w-full" loading="lazy" />
                         </div>
                       </div>
