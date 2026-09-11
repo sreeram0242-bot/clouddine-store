@@ -183,7 +183,7 @@ function LandingPage() {
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
           <a href="#top" className="flex items-center gap-3">
-            <img src={logo} alt="Cloud Dine" className="h-9 w-auto" />
+            <img src={logo} alt="CloudDine — Cloud Dine Logo" className="h-9 w-auto" />
             <span className="font-display text-xl font-semibold">
               Cloud <span className="text-gold-gradient">Dine</span>
             </span>
@@ -239,7 +239,7 @@ function LandingPage() {
             </h1>
 
             <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground sm:mt-6 sm:text-lg">
-              Cloud Dine is the all-in-one platform for QR-code ordering, live kitchen orders,
+              CloudDine (Cloud Dine) is the all-in-one platform for QR-code ordering, live kitchen orders,
               waiter management and multi-outlet control — the calm dashboard your floor has been asking for.
             </p>
 
@@ -399,7 +399,7 @@ function LandingPage() {
                     </span>
                   </div>
                   {portal.key !== "admin" && portal.key !== "master" && (
-                    <a href={portal.url} target="_blank" rel="noreferrer" className="hidden items-center gap-1.5 text-xs text-gold hover:underline sm:inline-flex">
+                    <a href={(portal as { url?: string }).url} target="_blank" rel="noreferrer" className="hidden items-center gap-1.5 text-xs text-gold hover:underline sm:inline-flex">
                       Open live <ExternalLink className="h-3 w-3" />
                     </a>
                   )}
@@ -587,7 +587,7 @@ function LandingPage() {
       <footer className="border-t border-border/60 py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-5 md:flex-row lg:px-8">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="Cloud Dine" className="h-7 w-auto" />
+            <img src={logo} alt="CloudDine — Cloud Dine Logo" className="h-7 w-auto" />
             <span className="font-display text-base font-semibold">
               Cloud <span className="text-gold-gradient">Dine</span>
             </span>
@@ -598,7 +598,7 @@ function LandingPage() {
             <a href="#pricing" className="hover:text-foreground">Pricing</a>
             <a href="#contact" className="hover:text-foreground">Contact</a>
           </div>
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Cloud Dine. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} CloudDine (Cloud Dine). All rights reserved.</p>
         </div>
       </footer>
     </div>
